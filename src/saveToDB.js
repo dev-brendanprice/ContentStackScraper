@@ -11,14 +11,6 @@ const pool = mysql.createPool({
     connectionLimit: 25,
     waitForConnections: true
 });
-console.log({
-    host: `${mode === 'production' ? process.env.DB_HOST : process.env.DEV_DB_HOST}`,
-    user: `${mode === 'production' ? process.env.DB_USER : process.env.DEV_DB_USER}`,
-    password: `${mode === 'production' ? process.env.DB_PASSWORD : process.env.DEV_DB_PASSWORD}`,
-    database: `${mode === 'production' ? process.env.DB_NAME : process.env.DEV_DB_NAME}`,
-    connectionLimit: 25,
-    waitForConnections: true
-});
 
 // Insert article into SQL database
 export async function saveToDB(articles) {
