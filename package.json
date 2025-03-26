@@ -2,9 +2,9 @@
   "name": "contentstack-scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "src/v2/scheduler.js",
+  "main": "src/scheduler.js",
   "scripts": {
-    "start": "node src/v2/scheduler.js"
+    "start": "node src/scheduler.js"
   },
   "keywords": [],
   "author": "",
