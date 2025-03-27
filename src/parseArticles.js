@@ -17,6 +17,7 @@ export function parseArticles(articles) {
         article.author = article.author.trim();
         article.uid = article.uid.trim();
         article.url = 'https://www.bungie.net/7/en/news/article' + hostedUrl.trim();
+        article.hostedUrl = hostedUrl.trim();
         article.type = 'news'; // Default
 
         const dateStringLong = date.toLocaleDateString('en-US', {
