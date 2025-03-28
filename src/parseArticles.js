@@ -8,7 +8,7 @@ export function parseArticles(articles) {
     for (let article of articles) {
         
         const date = new Date(article.date.trim());
-        const hostedUrl = article.url.hosted_url;
+        const hostedUrl = article.url.hosted_url.replace('/', '').trim();
 
         article.title = article.title.trim();
         article.subtitle = article.subtitle.trim();
@@ -16,8 +16,8 @@ export function parseArticles(articles) {
         article.publishedAt = article.publish_details.time.trim();
         article.author = article.author.trim();
         article.uid = article.uid.trim();
-        article.url = 'https://www.bungie.net/7/en/news/article' + hostedUrl.trim();
-        article.hostedUrl = hostedUrl.trim();
+        article.url = 'https://www.bungie.net/7/en/news/article' + '/' + hostedUrl;
+        article.hostedUrl = hostedUrl;
         article.type = 'news'; // Default
 
         const dateStringLong = date.toLocaleDateString('en-US', {
