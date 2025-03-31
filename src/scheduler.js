@@ -19,8 +19,11 @@ function startTaskScheduler() {
 
     let interval;
     function scheduleNextRun() {
+
+        const timeNow = new Date();
         interval = getNextInterval();
-        console.log(`next scheduled: in ${interval / (60 * 1000)} mins`);
+        console.log(`[${timeNow}] Scheduled: ${interval / (60 * 1000)} mins`);
+
         setTimeout(() => {
             startPagination();
             scheduleNextRun();
