@@ -1,19 +1,6 @@
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
-dotenv.config();
-
-const mode = process.env.MODE;
-const pool = mysql.createPool({
-    host: `${mode === 'production' ? process.env.DB_HOST : process.env.DEV_DB_HOST}`,
-    user: `${mode === 'production' ? process.env.DB_USER : process.env.DEV_DB_USER}`,
-    password: `${mode === 'production' ? process.env.DB_PASSWORD : process.env.DEV_DB_PASSWORD}`,
-    database: `${mode === 'production' ? process.env.DB_NAME : process.env.DEV_DB_NAME}`,
-    connectionLimit: 25,
-    waitForConnections: true
-});
 
 // Insert article into SQL database
-export async function saveToDB(articles) {
+export async function saveToDB(articles, pool) {
 
     const connection = await pool.getConnection();
     const query = `
