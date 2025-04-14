@@ -29,11 +29,13 @@ export async function startPagination() {
             });
 
             let response = await paginate(i).then(res => { return res });
-            let articles = parseArticles(response.entries); // Array
-            articles.forEach(v => { scraped++; });
-
-            await saveToDB(articles, pool); // save to sqldb
-            pool.end(); // end connection pool
+            if (response?.entries) {
+                let articles = parseArticles(response.entries); // Array
+                articles.forEach(v => { scraped++; });
+    
+                await saveToDB(articles, pool); // save to sqldb
+                pool.end(); // end connection pool
+            };
 
         } catch (err) {
             console.error(err);
