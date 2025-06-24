@@ -1,3 +1,4 @@
+import { buildCSV } from './csv/buildCSV.js';
 import { startPagination } from './startPagination.js';
 
 function getNextInterval() {
@@ -27,11 +28,13 @@ function startTaskScheduler() {
         setTimeout(() => {
             startPagination();
             scheduleNextRun();
+            buildCSV();
         }, interval);
     };
 
     // paginate immediately
     startPagination();
     scheduleNextRun();
+    buildCSV(); // build csv
 };
 startTaskScheduler();
