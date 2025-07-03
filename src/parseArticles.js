@@ -9,7 +9,6 @@ export function parseArticles(articles) {
         
         const date = new Date(article.date.trim());
         const hostedUrl = article.url.hosted_url.replace('/', '').trim();
-
         article.title = article.title.trim();
         article.subtitle = article.subtitle.trim();
         article.date = date;
@@ -18,7 +17,15 @@ export function parseArticles(articles) {
         article.uid = article.uid.trim();
         article.url = 'https://www.bungie.net/7/en/news/article' + '/' + hostedUrl;
         article.hostedUrl = hostedUrl;
-        article.type = 'news'; // Default
+        article.type = 'news'; // default type
+        
+        // article header image (can be null)
+        if (article.image?.url) {
+            article.imgUrl = article.image?.url.trim();
+        }
+        else {
+            article.imgUrl = null;
+        };
 
         const dateStringLong = date.toLocaleDateString('en-US', {
             month: 'long',
@@ -58,6 +65,7 @@ export function parseArticles(articles) {
 
         delete article.publish_details;
         delete article.system;
+        delete article.image;
     };
 
     return articles;

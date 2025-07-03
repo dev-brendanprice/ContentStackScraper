@@ -31,7 +31,7 @@ export async function startPagination() {
             let response = await paginate(i).then(res => { return res });
             if (response?.entries) {
                 let articles = parseArticles(response.entries); // Array
-                articles.forEach(v => { scraped++; });
+                scraped += articles.length;
     
                 await saveToDB(articles, pool); // save to sqldb
                 pool.end(); // end connection pool

@@ -4,8 +4,8 @@ export async function saveToDB(articles, pool) {
 
     const connection = await pool.getConnection();
     const query = `
-        INSERT INTO articles (uid, title, subtitle, date, dateShortForm, publishedAt, author, htmlContent, url, type, hostedUrl) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO articles (uid, title, subtitle, date, dateShortForm, publishedAt, author, htmlContent, url, type, hostedUrl, imgUrl) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
             title = VALUES(title), 
             subtitle = VALUES(subtitle), 
@@ -16,7 +16,8 @@ export async function saveToDB(articles, pool) {
             htmlContent = VALUES(htmlContent), 
             url = VALUES(url), 
             type = VALUES(type),
-            hostedUrl = VALUES(hostedUrl);
+            hostedUrl = VALUES(hostedUrl),
+            imgUrl = VALUES(imgUrl);
     `;
     
     // should be pushing (mostly) 25 articles at a time
@@ -33,7 +34,8 @@ export async function saveToDB(articles, pool) {
                 article.html_content,
                 article.url,
                 article.type,
-                article.hostedUrl
+                article.hostedUrl,
+                article.imgUrl
             ];
             return connection.query(query, values);
         }));
